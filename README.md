@@ -40,3 +40,4 @@ kobach/
 
 ## Drift-check
 কোনো স্টেজে ~6 সপ্তাহ meaningful progress না হলে থেমে সিদ্ধান্ত নাও: continue / shrink / pause।
+
