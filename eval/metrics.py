@@ -91,7 +91,17 @@ def run_experiment(taxonomy_path: str, legit_path: str, out_path: str):
           f"| Bypass rate: {bypassed/len(attacks)*100:.1f}%")
     print(f"Legit cases: {len(legits)} | False positives: {false_positives} "
           f"| False-positive rate: {false_positives/len(legits)*100:.1f}%")
-    print(f"Full log saved to: {out_path}")
+
+    # Category-wise breakdown — কোন category সবচেয়ে বেশি bypass হচ্ছে দেখার জন্য
+    print("\nCategory-wise bypass rate:")
+    categories = sorted(set(r["category"] for r in attacks))
+    for cat in categories:
+        cat_rows = [r for r in attacks if r["category"] == cat]
+        cat_bypassed = sum(1 for r in cat_rows if not r["blocked"])
+        print(f"  {cat}: {cat_bypassed}/{len(cat_rows)} bypassed "
+              f"({cat_bypassed/len(cat_rows)*100:.1f}%)")
+
+    print(f"\nFull log saved to: {out_path}")
 
 
 if __name__ == "__main__":
